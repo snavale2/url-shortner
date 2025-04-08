@@ -1,0 +1,23 @@
+{
+  "name": "url-shortner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@types/node": "^22.14.0",
+    "aws-lambda": "^1.0.7",
+    "aws-sdk": "^2.1692.0",
+    "nanoid": "^5.1.5",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.148"
+  }
+}
