@@ -5,12 +5,33 @@ import { nanoid } from 'nanoid';
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
 const tableName = 'ShortenedURLsTable';
 
+const corsHeaders = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key',
+    'Access-Control-Allow-Methods': 'OPTIONS,POST',
+    'Access-Control-Allow-Credentials': true
+};
+
 export const handler: APIGatewayProxyHandler = async (event) => {
+
+    // Handle OPTIONS requests for CORS preflight
+    if (event.httpMethod === 'OPTIONS') {
+        return {
+            statusCode: 200,
+            headers: corsHeaders,
+            body: ''
+        };
+    }
+
     const body = JSON.parse(event.body || '{}');
     const longURL = body.longURL;
 
     if (!longURL) {
-        return { statusCode: 400, body: JSON.stringify({ error: 'Missing longUrl' }) };
+        return { 
+            statusCode: 400,
+            headers: corsHeaders,
+            body: JSON.stringify({ error: 'Missing longUrl' })
+         };
     }
 
     const shortCode = nanoid(6); // Generate a unique short code
@@ -22,6 +43,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
 
     return {
         statusCode: 200,
+        headers: corsHeaders,
         body: JSON.stringify({ shortURL: `http://uurl.duckdns.org/${shortCode}` })
     };
 

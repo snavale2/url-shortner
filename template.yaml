@@ -10,6 +10,12 @@ Globals:
       Variables:
         TABLE_NAME: ShortenedURLsTable
 
+  Api:
+    Cors:
+      AllowMethods: "'GET,POST,OPTIONS'"
+      AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
+      AllowOrigin: "'*'"
+
 Resources:
 
   ## DynamoDB Table
