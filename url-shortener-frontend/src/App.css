@@ -1,28 +1,170 @@
 /* src/App.css */
 
 .container {
-  max-width: 600px;
-  margin: 4rem auto;
+  max-width: 800px;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 3rem;
   text-align: center;
-  font-family: sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+body {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  color: #1a237e;
+  font-size: 2.8rem;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 input {
-  width: 80%;
-  padding: 10px;
-  margin: 10px 0;
+  width: 70%;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  border: 2px solid #e8eaf6;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  color: #333;
+}
+
+input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+input:disabled {
+  opacity: 0.7;
+  background: #f5f7ff;
 }
 
 button {
-  padding: 10px 20px;
+  padding: 1rem 2rem;
+  margin-left: 0.5rem;
   cursor: pointer;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+button:disabled {
+  background: #93a5ff;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .result {
-  margin-top: 20px;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  border: 1px solid #e8eaf6;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  animation: slideDown 0.3s ease-out;
+  transform-origin: top;
+  color: #333;
+}
+
+.result a {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.result a:hover {
+  text-decoration: underline;
+}
+
+.result strong {
+  color: #333;
 }
 
 .error {
-  color: red;
-  margin-top: 20px;
+  color: #d32f2f;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(255, 235, 238, 0.9);
+  border-radius: 12px;
+  border: 1px solid #ffcdd2;
+  box-shadow: 0 4px 15px rgba(211, 47, 47, 0.1);
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.copy-button {
+  margin-left: 12px;
+  padding: 8px 16px;
+  font-size: 0.9em;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  opacity: 0.9;
+}
+
+.copy-button:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-4px); }
+  40%, 60% { transform: translateX(4px); }
+}
+
+.loading-indicator {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-right: 0.5em;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
