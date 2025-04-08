@@ -9,6 +9,7 @@ function App() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [lastShortenedInput, setLastShortenedInput] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,7 +36,8 @@ function App() {
 
       const data = await response.json();
       if (data && data.shortURL) {
-        setShortenedUrl(data.shortURL)
+        setShortenedUrl(data.shortURL);
+        setLastShortenedInput(originalUrl); // Store the input URL that was just shortened
       } else {
         setError('Unexpected response from server.')
       }
@@ -50,7 +52,6 @@ function App() {
     try {
       await navigator.clipboard.writeText(shortenedUrl);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error('Failed to copy:', err);
     }
@@ -71,7 +72,7 @@ function App() {
         />
         <button 
           type="submit" 
-          disabled={isLoading || !originalUrl.trim()}
+          disabled={isLoading || !originalUrl.trim() || originalUrl === lastShortenedInput}
           aria-busy={isLoading}
         >
           {isLoading ? (
