@@ -48,14 +48,32 @@ function App() {
     }
   }
 
+  // helper
+  async function copyText(text: string) {
+    if (navigator.clipboard && window.isSecureContext) {
+      // modern, secure-context path
+      return navigator.clipboard.writeText(text);
+    }
+    // fallback for http/older browsers
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+  }
+
+
   const handleCopyClick = async () => {
     try {
-      await navigator.clipboard.writeText(shortenedUrl);
+      await copyText(shortenedUrl);
       setCopied(true);
     } catch (err) {
       console.error('Failed to copy:', err);
     }
-  };
+  };  
 
   return (
     <div className="container">
